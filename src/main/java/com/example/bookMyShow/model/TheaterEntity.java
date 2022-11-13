@@ -2,10 +2,7 @@ package com.example.bookMyShow.model;
 
 import com.example.bookMyShow.Enums.SeatType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Theaters")
+@Builder
 public class TheaterEntity {
 
     @Id
@@ -33,6 +31,9 @@ public class TheaterEntity {
     @Column(name = "address",nullable = false)
      private String address;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<ShowEntity>shows;
 
      @OneToMany(cascade = CascadeType.ALL)
      @JsonIgnore
