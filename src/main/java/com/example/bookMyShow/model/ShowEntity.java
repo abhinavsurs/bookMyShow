@@ -1,10 +1,9 @@
 package com.example.bookMyShow.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,6 +17,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ShowEntity {
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
@@ -26,8 +26,14 @@ public class ShowEntity {
     private LocalDate showDate;
     @Column(name="show_time",columnDefinition = "TIME",nullable = false)
     private LocalTime showTime;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
     @Column(name = "created_At")
     private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
     @Column(name = "updated_At")
     private Date updatedAt;
 

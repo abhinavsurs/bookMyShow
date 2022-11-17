@@ -2,10 +2,7 @@ package com.example.bookMyShow.model;
 
 import com.example.bookMyShow.Enums.SeatType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,6 +12,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ShowSeatsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

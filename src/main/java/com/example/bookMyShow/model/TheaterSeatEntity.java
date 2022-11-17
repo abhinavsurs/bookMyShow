@@ -19,7 +19,7 @@ public class TheaterSeatEntity {
     private int id;
 
     @Column(name = "seat_number",nullable = false)
-    private String seatName;
+    private String seatNumber;
 
     @Column(name = "rate",nullable = false)
     private int rate;
