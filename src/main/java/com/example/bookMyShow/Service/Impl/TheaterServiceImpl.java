@@ -5,7 +5,8 @@ import com.example.bookMyShow.Enums.SeatType;
 import com.example.bookMyShow.Repository.TheaterRepository;
 import com.example.bookMyShow.Repository.TheaterSeatRepository;
 import com.example.bookMyShow.Service.TheaterService;
-import com.example.bookMyShow.dto.TheaterDto;
+import com.example.bookMyShow.dto.EntryRequest.TheaterEntryDto;
+import com.example.bookMyShow.dto.ResponseDto.TheaterResponseDto;
 import com.example.bookMyShow.model.TheaterEntity;
 import com.example.bookMyShow.model.TheaterSeatEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class TheaterServiceImpl implements TheaterService {
     TheaterSeatRepository theaterSeatRepository;
 
     @Override
-    public TheaterDto addTheater(TheaterDto theaterDto) {
-        TheaterEntity theaterEntity= TheaterConvertor.convertDtoToEntity((theaterDto));
+    public TheaterResponseDto addTheater(TheaterEntryDto theaterEntryDto) {
+        TheaterEntity theaterEntity= TheaterConvertor.convertDtoToEntity((theaterEntryDto));
 
         // creating seats
       List<TheaterSeatEntity>seats = createTheaterSeats();
@@ -34,7 +35,9 @@ public class TheaterServiceImpl implements TheaterService {
         }
         theaterRepository.save(theaterEntity);
 
-        return theaterDto;
+        TheaterResponseDto theaterResponseDto=TheaterConvertor.convertEntityToDto(theaterEntity);
+
+        return theaterResponseDto;
     }
 
     public List<TheaterSeatEntity> createTheaterSeats(){
@@ -58,16 +61,16 @@ public class TheaterServiceImpl implements TheaterService {
 
     TheaterSeatEntity getTheaterSeat(String seatName, int rate, SeatType seatType){
         // building TheaterSeats
-        return TheaterSeatEntity.builder().seatName(seatName).rate(rate).seatType(seatType).build();
+        return TheaterSeatEntity.builder().seatNumber(seatName).rate(rate).seatType(seatType).build();
     }
 
     @Override
-    public TheaterDto getTheater(int id) {
+    public TheaterResponseDto getTheater(int id) {
         // finding theaterEntity and converting it to TheaterDto
         TheaterEntity theaterEntity=theaterRepository.findById(id).get();
 
-        TheaterDto theaterDto=TheaterConvertor.convertEntityToDto(theaterEntity);
+        TheaterResponseDto theaterResponseDto=TheaterConvertor.convertEntityToDto(theaterEntity);
 
-        return theaterDto;
+        return theaterResponseDto;
     }
 }

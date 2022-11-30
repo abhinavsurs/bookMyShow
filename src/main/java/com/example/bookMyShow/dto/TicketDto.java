@@ -1,5 +1,7 @@
 package com.example.bookMyShow.dto;
 
+import com.example.bookMyShow.dto.ResponseDto.ShowResponseDto;
+import com.example.bookMyShow.dto.ResponseDto.UserResponseDto;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,7 +15,7 @@ public class TicketDto {
 
     double amount;
 
-    ShowDto showDto;
+    ShowResponseDto showDto;
 
-    UserDto userDto;
+    UserResponseDto userDto;
 }

@@ -1,23 +1,22 @@
 package com.example.bookMyShow.Convertor;
 
-import com.example.bookMyShow.dto.UserDto;
-
+import com.example.bookMyShow.dto.EntryRequest.UserEntryDto;
+import com.example.bookMyShow.dto.ResponseDto.UserResponseDto;
 import com.example.bookMyShow.model.UserEntity;
-import lombok.experimental.UtilityClass;
 
 
 public class UserConvertor {
-    public static UserEntity convertDtoToEntity(UserDto userDto){
+    public static UserEntity convertDtoToEntity(UserEntryDto userDto){
         // we are creating userEntity
 
-        return UserEntity.builder().id(userDto.getId()).name(userDto.getName())
-                .mobileNo(userDto.getMobileNo()).build();
+        return UserEntity.builder().name(userDto.getName())
+                .mobileNo(userDto.getMobNo()).build();
 
     }
 
-    public static UserDto convertEntityToDto(UserEntity userEntity){
+    public static UserResponseDto convertEntityToDto(UserEntity userEntity){
 
-        return UserDto.builder().id(userEntity.getId()).name(userEntity.getName())
-                .mobileNo(userEntity.getMobileNo()).build();
+        return UserResponseDto.builder().id(userEntity.getId()).name(userEntity.getName())
+                .mobNo(userEntity.getMobileNo()).build();
     }
 }

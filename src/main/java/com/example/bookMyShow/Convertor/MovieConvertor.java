@@ -1,23 +1,22 @@
 package com.example.bookMyShow.Convertor;
 
-import com.example.bookMyShow.dto.MovieDto;
+import com.example.bookMyShow.dto.EntryRequest.MovieEntryDto;
+import com.example.bookMyShow.dto.ResponseDto.MovieResponseDto;
 import com.example.bookMyShow.model.MovieEntity;
 import lombok.experimental.UtilityClass;
 
-import java.time.LocalDate;
-
 @UtilityClass
 public class MovieConvertor {
-    public static MovieEntity convertDtoToEntity(MovieDto movieDto){
+    public static MovieEntity convertDtoToEntity(MovieEntryDto movieEntryDto){
 
-        return MovieEntity.builder().id(movieDto.getId()).name(movieDto.getName())
-                .releaseDate(movieDto.getReleaseDate()).build();
+        return MovieEntity.builder().name(movieEntryDto.getName())
+                .releaseDate(movieEntryDto.getReleaseDate()).build();
                     }
 
 
-    public static MovieDto convertEntityToDto(MovieEntity movieEntity){
+    public static MovieResponseDto convertEntityToDto(MovieEntity movieEntity){
 
-        return MovieDto.builder().id(movieEntity.getId()).name(movieEntity.getName())
+        return MovieResponseDto.builder().id(movieEntity.getId()).name(movieEntity.getName())
                 .releaseDate(movieEntity.getReleaseDate()).build();
     }
 

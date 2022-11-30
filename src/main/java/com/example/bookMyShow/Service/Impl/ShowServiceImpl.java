@@ -6,7 +6,8 @@ import com.example.bookMyShow.Repository.ShowRepository;
 import com.example.bookMyShow.Repository.ShowSeatsRepository;
 import com.example.bookMyShow.Repository.TheaterRepository;
 import com.example.bookMyShow.Service.ShowService;
-import com.example.bookMyShow.dto.ShowDto;
+import com.example.bookMyShow.dto.EntryRequest.ShowEntryDto;
+import com.example.bookMyShow.dto.ResponseDto.ShowResponseDto;
 import com.example.bookMyShow.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,26 +29,29 @@ public class ShowServiceImpl implements ShowService {
 
 
     @Override
-    public ShowDto addShow(ShowDto showDto) {
+    public ShowResponseDto addShow(ShowEntryDto showEntryDto) {
 
-        ShowEntity showEntity= ShowConvertor.convertDtoToEntity(showDto);
+        ShowEntity showEntity= ShowConvertor.convertDtoToEntity(showEntryDto);
         // we have made the partial show entity object
         // now we need to set the movie and the theater entities not DTO's
 
         // movie Entity
 
-        MovieEntity movieEntity =movieRepository.findById(showDto.getMovieDto().getId()).get();
+        MovieEntity movieEntity =movieRepository.findById(showEntryDto.getMovieResponseDto().getId()).get();
 
         // TheaterEntity
-        TheaterEntity theaterEntity=theaterRepository.findById(showDto.getTheaterDto().getId()).get();
+        TheaterEntity theaterEntity=theaterRepository.findById(showEntryDto.getTheaterResponseDto()
+                .getId()).get();
 
         // we need to pass the list of theater seats
 
         generateShowEntitySeats(theaterEntity.getSeats(),showEntity);
         showRepository.save(showEntity);
 
+        ShowResponseDto showResponseDto=ShowConvertor.convertEntityToDto(showEntity);
 
-        return showDto;
+
+        return showResponseDto;
     }
     public void generateShowEntitySeats(List<TheaterSeatEntity>theaterSeatEntityList,ShowEntity showEntity){
 
@@ -72,10 +76,10 @@ public class ShowServiceImpl implements ShowService {
 
 
     @Override
-    public ShowDto getShow(int id) {
+    public ShowResponseDto getShow(int id) {
         ShowEntity showEntity=showRepository.findById(id).get();
 
-        ShowDto showDto=ShowConvertor.convertEntityToDto(showEntity);
-        return showDto;
+        ShowResponseDto showResponseDto=ShowConvertor.convertEntityToDto(showEntity);
+        return showResponseDto;
     }
 }

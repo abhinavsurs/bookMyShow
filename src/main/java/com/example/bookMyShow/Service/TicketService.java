@@ -1,11 +1,12 @@
 package com.example.bookMyShow.Service;
 
 import com.example.bookMyShow.dto.BookTicketRequestDto;
+import com.example.bookMyShow.dto.ResponseDto.TicketResponseDto;
 import com.example.bookMyShow.dto.TicketDto;
 
 public interface TicketService {
 
-    TicketDto getTicket(int id);
+    TicketResponseDto getTicket(int id);
 
-    TicketDto bookTicket(BookTicketRequestDto bookTicketRequestDto);
+    TicketResponseDto bookTicket(BookTicketRequestDto bookTicketRequestDto);
 }

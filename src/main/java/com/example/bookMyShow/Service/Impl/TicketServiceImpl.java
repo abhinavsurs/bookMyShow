@@ -6,6 +6,7 @@ import com.example.bookMyShow.Repository.TicketRepository;
 import com.example.bookMyShow.Repository.UserRepository;
 import com.example.bookMyShow.Service.TicketService;
 import com.example.bookMyShow.dto.BookTicketRequestDto;
+import com.example.bookMyShow.dto.ResponseDto.TicketResponseDto;
 import com.example.bookMyShow.dto.TicketDto;
 import com.example.bookMyShow.model.ShowEntity;
 import com.example.bookMyShow.model.ShowSeatsEntity;
@@ -31,16 +32,18 @@ public class TicketServiceImpl implements TicketService {
     TicketRepository ticketRepository;
 
     @Override
-    public TicketDto getTicket(int id) {
+    public TicketResponseDto getTicket(int id) {
 
         TicketEntity ticketEntity= ticketRepository.findById(id).get();
 
-        return TickerConvertor.convertEntityToDto(ticketEntity);
+        TicketResponseDto ticketResponseDto =TickerConvertor.convertEntityToDto(ticketEntity);
+
+        return  ticketResponseDto;
 
     }
 
     @Override
-    public TicketDto bookTicket(BookTicketRequestDto bookTicketRequestDto) {
+    public TicketResponseDto bookTicket(BookTicketRequestDto bookTicketRequestDto) {
 
         UserEntity userEntity= userRepository.findById(bookTicketRequestDto.getId()).get();
 

@@ -1,5 +1,6 @@
 package com.example.bookMyShow.Convertor;
 
+import com.example.bookMyShow.dto.ResponseDto.TicketResponseDto;
 import com.example.bookMyShow.dto.TicketDto;
 import com.example.bookMyShow.model.TicketEntity;
 import lombok.experimental.UtilityClass;
@@ -13,8 +14,8 @@ public class TickerConvertor {
                 .amount(ticketDto.getAmount()).build();
     }
 
-    public static TicketDto convertEntityToDto(TicketEntity ticketEntity){
-         return TicketDto.builder().id(ticketEntity.getId()).amount(ticketEntity
-                 .getAmount()).allotedSeats(ticketEntity.getAllottedSeats()).build();
+    public static TicketResponseDto convertEntityToDto(TicketEntity ticketEntity){
+         return TicketResponseDto.builder().id(ticketEntity.getId()).amount(ticketEntity
+                 .getAmount()).alltoedSeats(ticketEntity.getAllottedSeats()).build();
     }
 }
